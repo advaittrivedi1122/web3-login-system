@@ -1,8 +1,8 @@
 body {
-  /* margin: 1rem;
-  height: 90vh;
-  width: 90vw;
-  border: 1px solid red; */
-  background-image: url("https://w3academy.io/wp-content/uploads/2022/06/darkgradient.jpg");
-  background-size: cover;
+  /* margin: 1rem; */
+  height: 100vh;
+  width: auto;
+  background: linear-gradient(to left top, #3cbfd3, #00a2c6, #0084b5, #0066a1, #1b4987,
+  #4a4284, #693879, #802e69, #b24164, #d66359, #ea8e4f, #ecbd51);
+  background-size: contain;
 }
