@@ -4,7 +4,9 @@ const {connectDb} = require('./config/dbConnection')
 const port = process.env.PORT;
 
 const app = express();
-connectDb();
+connectDb().then(() => {
+    console.log('Connected to DB');
+});
 app.use(express.json());
 app.use("/api/users", require("./Users/user.route"));
 
