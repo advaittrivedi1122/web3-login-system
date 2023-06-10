@@ -1,0 +1,17 @@
+import { validateToken } from "../middleware/jwtToken";
+import * as userController from './user.controller';
+const express = require('express');
+
+const router = express.Router();
+
+
+router.post("/register", userController.registerUser);
+
+router.post("/login", userController.loginUser);
+
+router.put("/update", validateToken, userController.updateUser);
+
+router.delete("/delete", validateToken, userController.deleteUser);
+
+router.post("/addWalletAddress", validateToken, userController.addWalletAddress);
+module.exports = router
