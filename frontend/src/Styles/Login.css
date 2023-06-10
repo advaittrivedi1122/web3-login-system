@@ -1,3 +1,13 @@
 .login-box {
-    
+    height: 100%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.username, .password{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
