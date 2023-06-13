@@ -25,24 +25,25 @@ function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     console.log(`Username : ${username}`)
     console.log(`Password : ${password}`)
     const url = `${api}/login`
-    const data = fetch(url,{
+    const data = await fetch(url,{
       method: "POST",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: {
+      body: JSON.stringify({
         username,
         password
-      }
+      })
     })
-    .then((res)=>res.json())
-    .then((data)=>data)
+    const parsedData = await data.json()
+    console.log("🚀 ~ file: Login.jsx:44 ~ handleLogin ~ parsedData:", parsedData)
+    localStorage.setItem('jwt-auth-token',parsedData)
+    localStorage.setItem('username',username)
   }
 
   // const handleUsername = (e) => {
@@ -103,7 +104,9 @@ function Login() {
               </FormControl>
             </div>
                   <br />
+                  <Link to="/home">
             <Button variant="contained" onClick={handleLogin}>Login</Button>
+                  </Link>
             <br />
             <Link to="/register">
             <p>Don't have an account? Sign Up here</p>

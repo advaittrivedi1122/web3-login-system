@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
 function Register() {
-
+    const api = process.env.REACT_APP_API_URL
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +32,21 @@ function Register() {
     console.log(`Username : ${username}`)
     console.log(`Email : ${email}`)
     console.log(`Password : ${password}`)
+    const url = `${api}/register`
+    const data = fetch(url,{
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          email
+        })
+      })
+      .then((res)=>res.json())
+      .then((data)=>data)
   }
 
   useEffect(() => {
@@ -99,7 +114,9 @@ function Register() {
               </FormControl>
             </div>
             <br />
+            <Link to="/login">
             <Button variant="contained" onClick={handleRegister}>Register</Button>
+            </Link>
             <Link to="/login">
               <p>Already have an account? Sign in here</p>
             </Link>
