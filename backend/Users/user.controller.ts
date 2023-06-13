@@ -51,13 +51,13 @@ export async function registerUser(req: any, res: any): Promise<any> {
 //@acsess public
 
 export async function loginUser(req: any, res: any): Promise<any> {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { username, password } = req.body;
+  if (!username || !password) {
     res.status(400).json({
       message: "All fields are mandatory",
     });
   }
-  const user = await userServices.findUserByEmail(email);
+  const user = await userServices.findUserByName(username);
 
   if (user && (await utilService.verifyPassword(password, user.password))) {
     const accessToken = utilService.createJwtToken(
