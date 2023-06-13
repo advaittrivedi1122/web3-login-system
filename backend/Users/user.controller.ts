@@ -147,8 +147,8 @@ export async function updateUser(req: any, res: any): Promise<any> {
   }
 }
 
-//@desc Update User
-//@route Put /api/users/update
+//@desc Delete User
+//@route Delete /api/users/delete
 //@acsess private
 
 export async function deleteUser(req: any, res: any): Promise<any> {
@@ -156,6 +156,26 @@ export async function deleteUser(req: any, res: any): Promise<any> {
   if (user) {
       const deletedUser = await userServices.deleteUser(req.user.id);
       res.status(200).json({ deletedUser });
+  } else {
+    res.status(400).json({
+      message: "User not found",
+    });
+  }
+}
+
+//@desc Current User
+//@route Get /api/users/currentUser
+//@acsess private
+
+export async function currentUser(req: any, res: any): Promise<any> {
+  const user = await userServices.findUserById(req.user.id);
+  if (user) {
+      res.status(200).json({ 
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+       });
   } else {
     res.status(400).json({
       message: "User not found",
