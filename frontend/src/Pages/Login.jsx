@@ -31,6 +31,7 @@ function Login() {
     const url = `${api}/login`
     const data = await fetch(url,{
       method: "POST",
+      mode: "cors",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -40,7 +41,7 @@ function Login() {
         password
       })
     })
-    const parsedData = await data.json()
+    const parsedData = await JSON.stringify(data)
     console.log("🚀 ~ file: Login.jsx:44 ~ handleLogin ~ parsedData:", parsedData)
     localStorage.setItem('jwt-auth-token',parsedData)
     localStorage.setItem('username',username)
@@ -74,7 +75,7 @@ function Login() {
                 }}
               />
             </div>
-                <br />
+                {/* <br /> */}
             <div className="password">
               <AccountCircle sx={{ color: "action.active", mr: 1, my: 0.5 }} />
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">

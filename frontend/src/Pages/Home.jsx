@@ -17,8 +17,9 @@ function Home() {
     const accountAddress = await account[0];
     setWalletAddress(accountAddress)
     const authToken = localStorage.getItem('jwt-auth-token')
-    const data = fetch(`${api}/addWalletAddress`,{
+    const data = await fetch(`${api}/addWalletAddress`,{
         method: "POST",
+        mode: "cors",
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ function Home() {
   }, [walletAddress]);
   return (
     <div className="home">
-      <p>Hii, {username}</p>
+      <h2>Hii, {username}</h2>
       <br />
       <p>{walletAddress}</p>
       <br />
