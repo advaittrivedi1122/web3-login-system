@@ -12,7 +12,7 @@ function App() {
     <Route path="/" element={<Login />}></Route>
     <Route path="/login" element={<Login />}></Route>
     <Route path="/register" element={<Register />}></Route>
-    <Route path="/home" element={<Home />}></Route>
+    <Route path="/home" element={<Home username={localStorage.getItem("username")}/>}></Route>
     {/* <div className="App">
       <header className="App-header">
       </header>

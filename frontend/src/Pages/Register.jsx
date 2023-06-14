@@ -38,6 +38,7 @@ function Register() {
         mode: "cors",
         headers: {
           'Accept': 'application/json',
+          "Access-Control-Allow-Origin": "*",
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({

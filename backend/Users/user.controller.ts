@@ -10,7 +10,7 @@ const utilService = new Utils();
 //@acsess public
 
 export async function registerUser(req: any, res: any): Promise<any> {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   const { username, email, phone, password } = req.body;
   if (!username || !email || !phone || !password) {
     res.status(400).json({
@@ -52,7 +52,7 @@ export async function registerUser(req: any, res: any): Promise<any> {
 //@acsess public
 
 export async function loginUser(req: any, res: any): Promise<any> {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   const { username, password } = req.body;
   console.log("🚀 ~ file: user.controller.ts:55 ~ loginUser ~ password:", password)
   console.log("🚀 ~ file: user.controller.ts:55 ~ loginUser ~ username:", username)
@@ -73,7 +73,7 @@ export async function loginUser(req: any, res: any): Promise<any> {
     res.status(200).json({ accessToken });
   } else {
     res.status(400).json({
-      message: "Email or Password is not valid",
+      message: "Username or Password is not valid",
     });
   }
 }
@@ -83,7 +83,7 @@ export async function loginUser(req: any, res: any): Promise<any> {
 //@acsess private
 
 export async function addWalletAddress(req: any, res: any): Promise<any> {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   const { walletAddress } = req.body;
   if (!walletAddress) {
     res.status(400).json({
@@ -91,14 +91,14 @@ export async function addWalletAddress(req: any, res: any): Promise<any> {
     });
   }
 
-  const userAvailable = await userServices.findUserByWalletAddress(
-    walletAddress
-  );
-  if (userAvailable) {
-    res.status(400).json({
-      message: "Wallet Address already registered",
-    });
-  }
+  // const userAvailable = await userServices.findUserByWalletAddress(
+  //   walletAddress
+  // );
+  // if (userAvailable) {
+  //   res.status(400).json({
+  //     message: "Wallet Address already registered",
+  //   });
+  // }
 
   const user = await userServices.findUserById(req.user.id);
   if (user) {
@@ -118,7 +118,7 @@ export async function addWalletAddress(req: any, res: any): Promise<any> {
 //@acsess private
 
 export async function updateUser(req: any, res: any): Promise<any> {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   const { username, email, phone, walletAddress } = req.body;
   if (!username || !email || !phone || !walletAddress) {
     res.status(400).json({
@@ -159,7 +159,7 @@ export async function updateUser(req: any, res: any): Promise<any> {
 //@acsess private
 
 export async function deleteUser(req: any, res: any): Promise<any> {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   const user = await userServices.findUserById(req.user.id);
   if (user) {
       const deletedUser = await userServices.deleteUser(req.user.id);
@@ -176,7 +176,7 @@ export async function deleteUser(req: any, res: any): Promise<any> {
 //@acsess private
 
 export async function currentUser(req: any, res: any): Promise<any> {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   const user = await userServices.findUserById(req.user.id);
   if (user) {
       res.status(200).json({ 

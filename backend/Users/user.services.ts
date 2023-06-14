@@ -14,7 +14,7 @@ export class UserServices {
     
     async findUserByName (name: string) : Promise<typeof UserInterface> {
         console.log("🚀 ~ file: user.services.ts:16 ~ UserServices ~ findUserByName ~ name:", name)
-        return await UserSchema.findOne(name);
+        return await UserSchema.findOne({ username:name });
     }
 
     async findUserByPhone (phone: string) : Promise<typeof UserInterface> {

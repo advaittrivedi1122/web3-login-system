@@ -3,7 +3,8 @@ import "../Styles/Home.css";
 import Button from "@mui/material/Button";
 import { Web3 } from "web3";
 
-function Home() {
+function Home(props) {
+    console.log("🚀 ~ file: Home.jsx:7 ~ Home ~ props:", props)
     const api = process.env.REACT_APP_API_URL
   const [walletAddress, setWalletAddress] = useState("");
   const username = localStorage.getItem("username");
@@ -22,6 +23,7 @@ function Home() {
         mode: "cors",
         headers: {
           'Accept': 'application/json',
+          "Access-Control-Allow-Origin": "*",
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${authToken}`
         },
@@ -33,7 +35,7 @@ function Home() {
 
   useEffect(() => {
     console.log(walletAddress);
-  }, [walletAddress]);
+  }, [walletAddress, username]);
   return (
     <div className="home">
       <h2>Hii, {username}</h2>
