@@ -10,9 +10,11 @@ const utilService = new Utils();
 //@acsess public
 
 export async function registerUser(req: any, res: any): Promise<any> {
+  console.log("🚀 ~ file: user.controller.ts:13 ~ registerUser ~ req:", req.body)
   // res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
+    console.log("🚀 ~ file: user.controller.ts:17 ~ registerUser ~ username:", !username || !email || !password)
     res.status(400).json({
       message: "Fill all the details",
     });

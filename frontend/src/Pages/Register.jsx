@@ -36,11 +36,11 @@ function Register() {
     const data = await fetch(url,{
         method: "POST",
         mode: "cors",
-        // headers: {
-        //   'Accept': 'application/json',
-        //   // "Access-Control-Allow-Origin": "*",
-        //   'Content-Type': 'application/json',
-        // },
+        headers: {
+          'Accept': 'application/json',
+          // "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           username,
           password,
