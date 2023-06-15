@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import "../Styles/Login.css";
+import "../Styles/Register.css";
 import "../Styles/General.css";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -11,12 +11,14 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function Login() {
-  const api = process.env.REACT_APP_API_URL
+function Register() {
+    const api = process.env.REACT_APP_API_URL
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,43 +27,38 @@ function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const handleLogin = async(e) => {
+
+  const handleRegister = (e) => {
     console.log(`Username : ${username}`)
+    console.log(`Email : ${email}`)
     console.log(`Password : ${password}`)
-    const url = `${api}/login`
-    const data = await fetch(url,{
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username,
-        password
+    const url = `${api}/register`
+    const data = fetch(url,{
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          email
+        })
       })
-    })
-    const parsedData = await data.json()
-    console.log("🚀 ~ file: Login.jsx:44 ~ handleLogin ~ parsedData:", parsedData)
-    localStorage.setItem('jwt-auth-token',parsedData)
-    localStorage.setItem('username',username)
+      .then((res)=>res.json())
+      .then((data)=>data)
   }
 
-  // const handleUsername = (e) => {
-  //   setUsername(e.target.value);
-  //   // console.log(username);
-  // };
-
   useEffect(() => {
-    // console.log(username, password);
-  }, [username, password]);
+    // console.log(username, email, password);
+  }, [username, email, password]);
 
   return (
     <div className="parent-container">
       <div className="glass-card">
         <div className="username glass-card">
-          <h1>SIGN IN</h1>
+          <h1>SIGN UP</h1>
           <div className="login-box">
-
             <div className="username">
               <AccountCircle sx={{ color: "action.active", mr: 1, my: 0.5 }} />
               <TextField
@@ -74,7 +71,20 @@ function Login() {
                 }}
               />
             </div>
-                <br />
+
+            <div className="email">
+              <AccountCircle sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+              <TextField
+                sx={{ m: 1, width: "25ch" }}
+                required
+                id="outlined-required"
+                label="Email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </div>
+
             <div className="password">
               <AccountCircle sx={{ color: "action.active", mr: 1, my: 0.5 }} />
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
@@ -103,20 +113,17 @@ function Login() {
                 />
               </FormControl>
             </div>
-                  <br />
-                  <Link to="/home">
-            <Button variant="contained" onClick={handleLogin}>Login</Button>
-                  </Link>
             <br />
-            <Link to="/register">
-            <p>Don't have an account? Sign Up here</p>
+            <Link to="/login">
+            <Button variant="contained" onClick={handleRegister}>Register</Button>
             </Link>
-
+            <Link to="/login">
+              <p>Already have an account? Sign in here</p>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default Login;
+export default Register;

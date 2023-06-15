@@ -8,12 +8,13 @@
 }
 
 .glass-card {
-    height: 30em;
+    height: 25em;
     width: 25em;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
-    background: rgba(255, 255, 255, 0.671);
+    background: rgba(255, 255, 255, 0.39);
     box-shadow: 0 8px 32px 0 rgba(85, 77, 90, 0.555);
     backdrop-filter: blur( 20px );
     -webkit-backdrop-filter: blur( 20px );

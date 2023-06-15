@@ -11,6 +11,10 @@ export class UserServices {
     async findUserByEmail (email: string) : Promise<typeof UserInterface> {
         return await UserSchema.findOne({ email });
     }
+    
+    async findUserByName (name: string) : Promise<typeof UserInterface> {
+        return await UserSchema.findOne({ name });
+    }
 
     async findUserByPhone (phone: string) : Promise<typeof UserInterface> {
         return await UserSchema.findOne({ phone });

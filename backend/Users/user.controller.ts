@@ -51,13 +51,16 @@ export async function registerUser(req: any, res: any): Promise<any> {
 //@acsess public
 
 export async function loginUser(req: any, res: any): Promise<any> {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { username, password } = req.body;
+  console.log("🚀 ~ file: user.controller.ts:55 ~ loginUser ~ password:", password)
+  console.log("🚀 ~ file: user.controller.ts:55 ~ loginUser ~ username:", username)
+  if (!username || !password) {
     res.status(400).json({
       message: "All fields are mandatory",
     });
   }
-  const user = await userServices.findUserByEmail(email);
+  const user = await userServices.findUserByName(username);
+  console.log("🚀 ~ file: user.controller.ts:63 ~ loginUser ~ user:", user)
 
   if (user && (await utilService.verifyPassword(password, user.password))) {
     const accessToken = utilService.createJwtToken(
