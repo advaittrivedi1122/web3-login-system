@@ -5,9 +5,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 1rem;
 }
 .username, .password, .email{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.username{
+    padding-top: 1em;
 }

@@ -28,15 +28,17 @@ function Register() {
     event.preventDefault();
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     console.log(`Username : ${username}`)
     console.log(`Email : ${email}`)
     console.log(`Password : ${password}`)
     const url = `${api}/register`
-    const data = fetch(url,{
+    const data = await fetch(url,{
         method: "POST",
+        mode: "cors",
         headers: {
           'Accept': 'application/json',
+          "Access-Control-Allow-Origin": "*",
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -45,8 +47,9 @@ function Register() {
           email
         })
       })
-      .then((res)=>res.json())
-      .then((data)=>data)
+      const parsedData = await data.json();
+      console.log("🚀 ~ file: Register.jsx:49 ~ handleRegister ~ parsedData:", parsedData)
+      
   }
 
   useEffect(() => {

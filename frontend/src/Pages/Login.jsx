@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 function Login() {
   const api = process.env.REACT_APP_API_URL
@@ -28,22 +29,34 @@ function Login() {
   const handleLogin = async(e) => {
     console.log(`Username : ${username}`)
     console.log(`Password : ${password}`)
+    localStorage.clear()
     const url = `${api}/login`
     const data = await fetch(url,{
       method: "POST",
+      mode: "cors",
       headers: {
-        'Accept': 'application/json',
+        'Accept': 'application/text',
+        "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         username,
         password
       })
+    }).then((res) => {
+      console.log("🚀 ~ file: Login.jsx:45 ~ handleLogin ~ res:", res)
+      return res
+    }).then((res) => {
+      console.log("🚀 ~ file: Login.jsx:48 ~ handleLogin ~ res:", res)
+      return res.json()
+      
     })
-    const parsedData = await data.json()
+    const parsedData = await data.accessToken
     console.log("🚀 ~ file: Login.jsx:44 ~ handleLogin ~ parsedData:", parsedData)
     localStorage.setItem('jwt-auth-token',parsedData)
     localStorage.setItem('username',username)
+    const userData = jwt_decode(parsedData)
+    console.log("🚀 ~ file: Login.jsx:58 ~ handleLogin ~ userData:", userData)
   }
 
   // const handleUsername = (e) => {
@@ -74,7 +87,7 @@ function Login() {
                 }}
               />
             </div>
-                <br />
+                {/* <br /> */}
             <div className="password">
               <AccountCircle sx={{ color: "action.active", mr: 1, my: 0.5 }} />
               <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
