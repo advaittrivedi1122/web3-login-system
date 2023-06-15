@@ -175,6 +175,7 @@ export async function currentUser(req: any, res: any): Promise<any> {
         username: user.username,
         email: user.email,
         phone: user.phone,
+        walletAddress: user.walletAddress,
        });
   } else {
     res.status(400).json({
