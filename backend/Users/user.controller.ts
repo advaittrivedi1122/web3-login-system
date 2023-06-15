@@ -11,19 +11,17 @@ const utilService = new Utils();
 
 export async function registerUser(req: any, res: any): Promise<any> {
   // res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-  const { username, email, phone, password } = req.body;
-  if (!username || !email || !phone || !password) {
+  const { username, email, password } = req.body;
+  if (!username || !email || !password) {
     res.status(400).json({
       message: "Fill all the details",
     });
   }
 
-  const userAvailable =
-    (await userServices.findUserByEmail(email)) ||
-    (await userServices.findUserByPhone(phone));
+  const userAvailable = await userServices.findUserByEmail(email)
   if (userAvailable) {
     res.status(400).json({
-      message: "Email id or Phone Number registered",
+      message: "Email id registered",
     });
   }
 
@@ -32,7 +30,6 @@ export async function registerUser(req: any, res: any): Promise<any> {
   const user = await userServices.createUser({
     username,
     email,
-    phone,
     password: hashedPassword,
   });
 
