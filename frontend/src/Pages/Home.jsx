@@ -25,7 +25,7 @@ function Home(props) {
           'Accept': 'application/json',
           "Access-Control-Allow-Origin": "*",
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authToken}`
+          'Authorization': `${authToken}`
         },
         body: JSON.stringify({
           walletAddress
