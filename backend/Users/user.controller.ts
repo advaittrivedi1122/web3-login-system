@@ -128,15 +128,13 @@ export async function updateUser(req: any, res: any): Promise<any> {
   const user = await userServices.findUserById(req.user.id);
   if (user) {
     let userAvailable = await userServices.findUserByEmail(email);
-    if(!userAvailable || userAvailable._id.toString() == req.user.id){
-      userAvailable  = await userServices.findUserByPhone(phone);
-    }
+
     if(!userAvailable || userAvailable._id.toString() == req.user.id){
       userAvailable  = await userServices.findUserByWalletAddress(walletAddress);
     }
     if (userAvailable && userAvailable._id.toString() != req.user.id) {
       res.status(400).json({
-        message: "Email id or Phone Number or WalletAddress registered",
+        message: "Email id or WalletAddress registered",
       });
     } else {
       const updatedUser = await userServices.updateUser(req.user.id, {
