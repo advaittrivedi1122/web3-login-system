@@ -22,9 +22,9 @@ function Home(props) {
         method: "POST",
         mode: "cors",
         headers: {
-          'Accept': 'application/json',
-          "Access-Control-Allow-Origin": "*",
-          'Content-Type': 'application/json',
+          // 'Accept': 'application/json',
+          // // "Access-Control-Allow-Origin": "*",
+          // 'Content-Type': 'application/json',
           'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify({

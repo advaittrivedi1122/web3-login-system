@@ -34,11 +34,11 @@ function Login() {
     const data = await fetch(url,{
       method: "POST",
       mode: "cors",
-      headers: {
-        'Accept': 'application/text',
-        "Access-Control-Allow-Origin": "*",
-        'Content-Type': 'application/json'
-      },
+      // headers: {
+      //   'Accept': 'application/text',
+      //   "Access-Control-Allow-Origin": "*",
+      //   'Content-Type': 'application/json'
+      // },
       body: JSON.stringify({
         username,
         password
