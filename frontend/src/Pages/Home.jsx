@@ -16,8 +16,8 @@ function Home(props) {
     const enabledWeb3 = await ethereum.enable();
     const account = await web3Instance.eth.getAccounts();
     const accountAddress = await account[0];
-    setWalletAddress(accountAddress)
-    const authToken = localStorage.getItem('jwt-auth-token')
+    let a = await setWalletAddress(accountAddress)
+    const authToken = await localStorage.getItem('jwt-auth-token')
     const data = await fetch(`${api}/addWalletAddress`,{
         method: "POST",
         mode: "cors",
@@ -28,7 +28,7 @@ function Home(props) {
           'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify({
-          walletAddress
+          walletAddress: accountAddress
         })
       })
   };
